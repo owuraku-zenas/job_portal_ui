@@ -1,0 +1,29 @@
+.services {
+    display: flex;
+    /* background-color: green; */
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 40px;
+}
+
+.services__content {
+    flex: 1;
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border: 5px solid;
+    border-radius: 50%;
+    color: rgb(51, 145, 71);
+}
