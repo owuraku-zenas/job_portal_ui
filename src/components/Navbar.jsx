@@ -5,7 +5,7 @@ export const Navbar = () => {
     return (
         <div className='navbar'>
             <h3 className="logo">
-                Logo
+                Job Portal
             </h3>
             
             <ul className="nav__links">
