@@ -1,40 +1,19 @@
-import React, { useEffect } from 'react'
-import '../styles/Hero.css'
+import { AiOutlineSearch } from 'react-icons/ai'
 
+
+// TODO: Sliging images
 export const Hero = () => {
 
-    // useEffect(() => {
-    //   const changeBackground = () => {
-    //     const images = [
-    //         'url("../assets/hero1.jpg")',
-    //         'url("../assets/hero2.jpg")',
-    //         'url("../assets/hero3.jpg")',
-    //         'url("../assets/hero4.jpg")',
-    //         'url("../assets/hero5.jpg")',
-    //         'url("../assets/hero6.jpg")',
-    //     ]
-
-    //     const hero = document.getElementsByClassName("hero")
-
-    //     const background = images[Math.floor(Math.random() * images.length)]
-
-    //     hero.style.backgroundImage = background
-    //   }
-
-    //   setInterval(changeBackground, 1000)
-    // }, [])
-
-
     return (
-        <div className='hero'>
-            <div className="hero__content">
-                <div className="info">
+        <div className="bg-[url('/src/assets/hero2.jpg')] bg-cover bg-center bg-fixed h-[75vh]">
+            <div className="text-white flex flex-col items-center justify-center h-full bg-opacity-60 bg-black">
+                <div className="text-center px-10">
                     <h1>You deserve a job that loves you back</h1>
-                    <p>Find a Job that fits your style and constraints.</p>
+                    <p className='text-lg font-bold'>Find a Job that fits your style and constraints.</p>
                 </div>
-                <div className="input__field">
-                    <input type="text" />
-                    <button>Find Job</button>
+                <div className="py-10 w-4/5 max-w-screen-lg flex flex-row justify-center items-center h-12">
+                    <input className='w-3/5 text-base text-black px-5 py-1 border-0' type="text" />
+                    <button className='bg-green-700 border-0 px-5 py-1'><AiOutlineSearch size={24}/> </button>
                 </div>
             </div>
         </div>
