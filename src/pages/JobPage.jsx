@@ -1,50 +1,89 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiFillStar } from 'react-icons/ai'
 import { JobPageHero } from '../components/JobPageHero'
 import { RiLinkedinBoxFill, RiLinksLine, RiTwitterFill } from 'react-icons/ri'
 import { TbMap2 } from 'react-icons/tb'
 import { BsPerson } from 'react-icons/bs'
+import { useParams } from 'react-router-dom'
+import { getJob, getUser } from '../api/services'
+import { JobList } from '../components/JobList'
+import { FaMoneyBill } from 'react-icons/fa'
 
 export const JobPage = () => {
+  const params = useParams()
+  const [job, setJob] = useState({})
+  const [roles, setRoles] = useState([])
+  const [requirements, setRequirements] = useState([])
+  const [user, setUser] = useState({})
+
+  useEffect(() => {
+    const job = async () => {
+      const response = await getJob(localStorage.getItem("token"), params.jobId)
+      console.log(response?.data?.data);
+      if (response?.status) {
+        setJob(response?.data?.data)
+        console.log(response?.data?.data?.responsibilities);
+        setRoles(response?.data?.data?.responsibilities)
+        setRequirements(response?.data?.data?.requirements)
+      }
+    }
+
+    const user = async () => {
+      const response = await getUser(localStorage.getItem("token"))
+      console.log(response?.data);
+      if (response?.status) {
+
+        setUser(response?.data)
+      }
+    }
+
+    job()
+    user()
+  }, [])
+
+
   return (
     <div className='flex flex-col items-center'>
-      <JobPageHero />
+      <JobPageHero title={job?.title} type={job?.job_type} />
       <div className='flex flex-row py-10 items-start gap-8 w-[calc(100%-400px)]'>
-        <div className='flex items-center flex-col gap-8 flex-1 text-gray-500'>
+        <div className='flex items-start flex-col gap-8 flex-1 text-gray-500'>
           <header className="flex items-center gap-6 w-full">
-            <div className="h-[120px] w-[120px] bg-green-400">
-              Logo
-            </div>
             <div className="flex flex-col flex-1">
-              <h3 className='text-2xl text-black'>Name of the company</h3>
-              <ul className='flex gap-4'>
-                <li className='flex items-center'><RiLinksLine />Website</li>
+              <h3 className='text-2xl text-black'>{user.name}</h3>
+              {/* <ul className='flex gap-4'>
+                
+                <li className='flex items-center'><RiLinksLine />{user.website}</li>
                 <li className='flex items-center'><RiLinkedinBoxFill />Linked In</li>
                 <li className='flex items-center '><RiTwitterFill />Twitter</li>
-              </ul>
+              </ul> */}
             </div>
           </header>
           <hr className='w-full' />
           <div className='flex flex-col gap-4'>
             <section>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero, numquam ullam saepe rem distinctio odio incidunt vel iusto dolor adipisci voluptatem praesentium maxime dolore exercitationem omnis fugiat architecto dolorem tenetur.
-              Dolorem eveniet vitae, voluptatem possimus et suscipit modi excepturi cupiditate obcaecati corporis asperiores laborum ratione, laboriosam quidem aspernatur quia eligendi delectus. Tempore provident eius incidunt consequuntur error culpa porro maiores.
+              {job?.description}
             </section>
             <div className='flex flex-col gap-4'>
               <h3>The <span className='text-black'>Name of Job Role</span> will have responsibilities that include: </h3>
               <ul className='list-disc pl-5 flex flex-col gap-4 marker:text-green-500'>
-                <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis officia fuga id nobis, adipisci modi? Iure nisi quo labore culpa necessitatibus asperiores quos facilis voluptates soluta possimus, nesciunt, in qui.</li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et impedit </li>
-                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi repellendus labore pariatur non nobis sequi laboriosam quod sed voluptatem quibusdam, fugiat atque iure, dignissimos nihil laudantium. Fugit unde ipsam dolore! </li>
-                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et impedit </li>
+                { roles ?
+                  roles.map((role, index) => (
+                    <li key={index}>{role}</li>
+                  )) : null
+                }
+
               </ul>
             </div>
           </div>
           <div className="w-full  flex flex-col gap-4">
             <h3 className='text-black text-xl font-[500]'>Job Requirement</h3>
             <ul className='flex flex-col gap-4 list-disc pl-5 marker:text-green-500'>
-              <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia hic quos facere itaque, enim, nobis error earum libero numquam facilis, dolores tenetur totam excepturi. Necessitatibus omnis qui veritatis vitae voluptate!</li>
-              <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur id dolor distinctio porro error fuga itaque ad accusantium sit. Quisquam labore sequi ipsum asperiores eaque error doloremque amet, odio illo.</li>
+              {
+                requirements ?
+                requirements.map((requirement, index) => (
+                  <li key={index}> {requirement} </li>
+                )) : null
+              }
             </ul>
           </div>
         </div>
@@ -58,7 +97,7 @@ export const JobPage = () => {
                 </div>
                 <div>
                   <h3>Location:</h3>
-                  <p className='text-gray-500'>Actual Location</p>
+                  <p className='text-gray-500'>{job?.location}</p>
                 </div>
               </li>
               <li className='flex gap-4'>
@@ -67,25 +106,16 @@ export const JobPage = () => {
                 </div>
                 <div>
                   <h3>Job Title:</h3>
-                  <p className='text-gray-500'>Senior Software Engineer</p>
+                  <p className='text-gray-500'>{job?.title}</p>
                 </div>
               </li>
               <li className='flex gap-4'>
                 <div className='text-green-500'>
-                  <BsPerson size={25} />
-                </div>
-                <div>
-                  <h3>Hours:</h3>
-                  <p className='text-gray-500'>40h/week</p>
-                </div>
-              </li>
-              <li className='flex gap-4'>
-                <div className='text-green-500'>
-                  <BsPerson size={25} />
+                  <FaMoneyBill size={25} />
                 </div>
                 <div>
                   <h3>Rate:</h3>
-                  <p className='text-gray-500'>$1.5k - $2k/month</p>
+                  <p className='text-gray-500'>Ghc{job?.rate}/Month</p>
                 </div>
               </li>
             </ul>

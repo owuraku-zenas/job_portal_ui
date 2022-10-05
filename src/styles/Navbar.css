@@ -3,15 +3,24 @@
     /* background: pink; */
     justify-content: space-around;
     align-items: center;
-    height: 6vh;
+    height: 8vh;
     box-shadow: rgba(50, 50, 93, 0.23) 0 30px 30px -20px;
     padding: 0px 40px;
+    /* background-color: rgba(255, 255, 255, 0.3); */
+    /* position: absolute; */
+    width: 100%;
 }
 
 .logo {
     cursor: pointer;
     color: rgb(51, 145, 71);
     font-size: x-large;
+    background-color: white;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
 }
 
 
@@ -19,9 +28,9 @@
     display: flex;
     /* justify-content: flex-end; */
     padding: 0;
+    /* margin: 20px 0; */
     flex: 1;
     justify-content: center;
-    height: 100%;
 }
 
 .nav__links li {
@@ -32,10 +41,16 @@
     list-style: none;
     font-size: 18px;
     font-weight: 600;
-    padding: 0 10px;
-    margin: 0 10px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    margin: 10px;
     cursor: pointer;
     /* border-bottom: 5px solid gray; */
+}
+
+.nav__links li:hover {
+    color: white;
+    background-color: green;
 }
 
 .right__nav {

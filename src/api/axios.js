@@ -2,7 +2,8 @@ import axios from 'axios'
 
 export default axios.create({
 
-    baseURL: 'http://localhost:8000/api',
+    // baseURL: 'http://localhost:8000/api',
+    baseURL: 'https://job-portal-webservice.herokuapp.com/api'
 })
 
 axios.interceptors.request.use(function (config) {

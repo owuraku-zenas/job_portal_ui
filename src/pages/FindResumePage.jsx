@@ -4,7 +4,7 @@ import { ResumeList } from '../components/ResumeList'
 export const FindResumePage = () => {
     return (
         <div>
-            <div className="bg-gray-100 bg-cover bg-center h-[20vh] w-full">
+            <div className="bg-gray-100 bg-cover bg-center h-[40vh] w-full">
                 <div className="text-white flex flex-col items-center justify-center w-full h-full bg-opacity-30  bg-black gap-2">
                     <div className='w-[calc(100%-400px)]'>
                         <div className="text-center flex flex-row items-center justify-between w-full gap-10">

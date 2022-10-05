@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useEffect } from 'react'
 import { AiFillStar } from 'react-icons/ai'
+import { getAllJobs } from '../api/services'
 import { JobList } from '../components/JobList'
 
 export const FindJobPage = () => {
+
+  const [jobs, setJobs] = useState([])
+
+  useEffect(() => {
+    const allJobs = async () => {
+      const response = await getAllJobs()
+      if (response?.status === 200) {
+        console.log(response?.data);
+        setJobs(response?.data?.data)
+      } else {
+        null
+      }
+    }
+
+    allJobs()
+  }, [])
+
   return (
     <div>
       <div className="bg-gray-100 bg-cover bg-center h-[20vh] w-full">
@@ -18,7 +37,7 @@ export const FindJobPage = () => {
       </div>
       <div className='flex justify-center'>
         <div className="w-[calc(100%-400px)] flex justify-center gap-10 items-start">
-          <JobList />
+          <JobList jobs={jobs}/>
           <form className="w-[30%] py-5 flex flex-col gap-10">
             <div className="w-full flex flex-col gap-2">
               <label htmlFor='order' className='text-xl'>Sort By</label>

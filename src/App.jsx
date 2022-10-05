@@ -1,19 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+
 import './App.css'
-import { Navbar } from './components/Navbar'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { HomePage } from './pages/HomePage'
+
+import AppRouter from './AppRouter'
+
 
 function App() {
-    const [count, setCount] = useState(0)
 
-    return (
-      <div className="App">
-        <Navbar />
-        <HomePage />
-      </div>
-    )
-  }
+
+  return (
+    <div>
+      <AppRouter />
+      {/* <Footer /> */}
+    </div>
+  )
+}
 
 export default App

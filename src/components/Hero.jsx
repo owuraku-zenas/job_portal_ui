@@ -11,10 +11,7 @@ export const Hero = () => {
                     <h1>You deserve a job that loves you back</h1>
                     <p className='text-lg font-bold'>Find a Job that fits your style and constraints.</p>
                 </div>
-                <div className="py-10 w-4/5 max-w-screen-lg flex flex-row justify-center items-center h-12">
-                    <input className='w-3/5 text-base text-black px-5 py-1 border-0' type="text" />
-                    <button className='bg-green-700 border-0 px-5 py-1'><AiOutlineSearch size={24}/> </button>
-                </div>
+            
             </div>
         </div>
     )
